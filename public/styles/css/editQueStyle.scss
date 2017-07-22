@@ -1,0 +1,36 @@
+/* Start Disable Overflow-x */
+
+body{
+	overflow-x: hidden !important;
+}
+
+/* End Disable Overflow-x */
+
+/* Start Section Page */
+
+.pageSection{
+	background-color: #263238;
+	color: white;
+	.row{
+		margin-bottom: 0;
+		.asideLeft{
+			height: auto;
+			.input-field{
+				label{
+					left: initial;
+				}
+				.picker{
+					direction: ltr;
+				}
+				button{
+					margin-bottom: 50px;
+				}
+			}
+			.ans{
+				margin-left: -10px;
+			}
+		}
+	}
+}
+
+/* End Section Page */

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,IAAI,CACH,UAAU,CAAE,iBAAiB,CAO9B,YAAY,CACX,gBAAgB,CAAE,OAAO,CACzB,KAAK,CAAE,KAAK,CACZ,iBAAI,CACH,aAAa,CAAE,CAAC,CAChB,4BAAU,CACT,MAAM,CAAE,KAAK,CAIV,+CAAG,CACF,SAAS,CAAE,GAAG,CAIb,kDAAC,CACA,SAAS,CAAE,cAAc",
+"sources": ["myExamsStyle.scss"],
+"names": [],
+"file": "myExamsStyle.css"
+}

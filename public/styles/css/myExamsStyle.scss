@@ -1,0 +1,38 @@
+/* Start Disable Overflow-x */
+
+body{
+	overflow-x: hidden !important;
+}
+
+/* End Disable Overflow-x */
+
+/* Start Section Page */
+
+.pageSection{
+	background-color: #26a69a;
+	color: white;
+	.row{
+		margin-bottom: 0;
+		.asideLeft{
+			height: 100vh;
+			table{
+				tbody{
+					tr{
+						.en{
+							direction: ltr;
+						}
+						td{
+							a{
+								i{
+									transform: rotate(180deg);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/* End Section Page */
