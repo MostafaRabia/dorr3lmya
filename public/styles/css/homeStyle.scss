@@ -4,11 +4,13 @@
 	background-color: rgba(2,2,2,0.2);
 	position: relative;
 	color: white;
+	margin-top: 5px;
 	.infoDiv{
+		min-height: 100vh;
 		img{
 			display: block;
 			margin: 0 auto;
-			height: 20vh;
+			height: 15vh;
 		}
 		h4{
 			padding-top: 5px;

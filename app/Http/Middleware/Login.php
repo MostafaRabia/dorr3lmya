@@ -15,10 +15,14 @@ class Login
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->check()&&auth()->user()->admin==0||auth()->user()->admin==2){
-            return $next($request);
-        }elseif (auth()->check()&&auth()->user()->admin==1){
-            return redirect('exam')->with('Error',true)->with('pModal',trans('Modal.pHaveNoPer'));
+        if (auth()->check()){
+            if (auth()->user()->admin==0||auth()->user()->admin==2){
+                return $next($request);
+            }elseif (auth()->check()&&auth()->user()->admin==1){
+                return redirect('exams')->with('Error',true)->with('pModal',trans('Modal.pHaveNoPer'));
+            }else{
+                return redirect('/')->with('Error',true)->with('pModal',trans('Modal.pNotRegisterd'));
+            }
         }else{
             return redirect('/')->with('Error',true)->with('pModal',trans('Modal.pNotRegisterd'));
         }

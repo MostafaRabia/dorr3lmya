@@ -7,14 +7,12 @@ body{
 /* End Disable Overflow-x */
 
 /* Start Section Page */
-
 .pageSection{
-	background-color: #26a69a;
 	color: white;
 	.row{
 		margin-bottom: 0;
 		.asideLeft{
-			height: 100vh;
+			min-height: 100vh;
 			table{
 				tbody{
 					tr{
@@ -26,6 +24,9 @@ body{
 								i{
 									transform: rotate(180deg);
 								}
+							}
+							label{
+								color: white;
 							}
 						}
 					}

@@ -15,25 +15,15 @@ class Profile extends Controller
 			return auth()->user()->username.' | '.trans('Titles.nameOfWebSite');
 		});
 		$getExams = Exams::orderBy('id','desc')->get();
-		foreach ($getExams as $Exam){
-			$getPermission = Permission::where('id_exam',$Exam->id)->where('id_user',auth()->user()->id_user)->first();
-		}
-		return view(app('users').'.myExams',['getExams'=>$getExams,'getPermission'=>$getPermission]);
+		return view(app('users').'.myExams',['getExams'=>$getExams]);
 	}
 	public function showEnterExam($Name){
-		/*
-
-
-					DONT FORGET TO PUT 1 IN COMPLETE
-
-
-		*/
 		$getId = Exams::where('name',$Name)->first();
 		$getPermission = Permission::where('id_exam',$getId->id)->where('id_user',auth()->user()->id_user)->first();
-		if ($getPermission->ban==1||$getPermission->finish==1){
+		if ($getPermission->ban==1||$getPermission->finish==1||$getId->avil==0){
 			return redirect()->back();
 		}
-		$getQues = Ques::where('id_exam',$getId->id)->get();
+		$getQues = Ques::where('id_exam',$getId->id)->inRandomOrder()->get();
 		app()->singleton('Title',function() use ($Name){
 			return $Name.' | '.trans('Titles.nameOfWebSite');
 		});
@@ -67,7 +57,7 @@ class Profile extends Controller
 				$addResult->id_user = auth()->user()->id;
 				$addResult->question = $getQue->id_que;
 				$addResult->answer = $r->input($explodes[$key - 1][0].'_'.$explodes[$key - 1][1]);
-				$addResult->notes = 'لا توجد ملاحظات للأن';
+				$addResult->notes = '----';
 				$addResult->result = $Right;
 			$addResult->save();
 		}

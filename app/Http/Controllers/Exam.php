@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Exams;
 use App\Results;
+use App\Users;
 use App\Ques;
 use App\Permission;
 use App\Member;
@@ -37,6 +38,11 @@ class Exam extends Controller
 			$addExam = new Exams;
 				$addExam->name = $r->input('name');
 				$addExam->time = $r->input('time');
+				$addExam->dateFrom = $r->input('dateFrom');
+				$addExam->dateTo = $r->input('dateTo');
+				$addExam->timeFrom = $r->input('timeFrom');
+				$addExam->timeTo = $r->input('timeTo');
+				$addExam->avil = 1;
 			$addExam->save();
 			$idExam = $addExam->id;
 			$getMembers = Member::get();
@@ -118,6 +124,10 @@ class Exam extends Controller
 		}else{
 			$getQuesAndExam->Exam->name = $r->input('name');
 			$getQuesAndExam->Exam->time = $r->input('time');
+			$getQuesAndExam->Exam->dateFrom = $r->input('dateFrom');
+			$getQuesAndExam->Exam->dateTo = $r->input('dateTo');
+			$getQuesAndExam->Exam->timeFrom = $r->input('timeFrom');
+			$getQuesAndExam->Exam->timeTo = $r->input('timeTo');
 			$getQuesAndExam->ques = $r->input('ques');
 			$getQuesAndExam->ans1 = $r->input('ans1');
 			$getQuesAndExam->ans2 = $r->input('ans2');
@@ -131,22 +141,22 @@ class Exam extends Controller
 	}
 	public function deleteQue($id){
 		$Que = Ques::find($id);
-		$updateQues = Exams::find($Que->Exam->id);
-		$updateQues->ques--;
-		$updateQues->save();
+			$updateQues = Exams::find($Que->Exam->id);
+			$updateQues->ques--;
+			$updateQues->save();
 		$Que->delete();
 		return redirect()->back();
 	}
 	public function showExam($Name){
 		$getId = Exams::where('name',$Name)->first();
-		$getQues = Ques::where('id_exam',$getId->id)->get();
+		$getQues = Ques::where('id_exam',$getId->id)->inRandomOrder()->get();
 		app()->singleton('Title',function() use ($Name){
 			return $Name.' | '.trans('Titles.nameOfWebSite');
 		});
-		return view(app('admin').'.showExam',['getQues'=>$getQues,'name'=>$Name]);
+		return view(app('admin').'.showExam',['getQues'=>$getQues,'name'=>$Name,'getId'=>$getId]);
 	}
 	public function Results($id){
-		$getResults = Results::where('id_exam',$id)->get();
+		$getResults = Results::where('id_exam',$id)->paginate(5);
 		app()->singleton('Title',function(){
 			return trans('Titles.Results');
 		});
@@ -160,15 +170,57 @@ class Exam extends Controller
 		return view(app('admin').'.ShowNotes',['getResult'=>$getResult]);
 	}
 	public function Notes(Request $r,$id){
-		if ($r->input('result')=='right'){
+		$addNotes = Results::find($id);
+			$addNotes->notes = $r->input('notes');
+		$addNotes->save();
+		return redirect('results/exam/'.$addNotes->id_exam);
+	}
+	public function Stop(Request $r,$id){
+		if ($r->input('stop')=='Stop'){
+			$Avil = 0;
+		}else{
+			$Avil = 1;
+		}
+		$stopExam = Exams::find($id);
+			$stopExam->avil = $Avil;
+		$stopExam->save();
+	}
+	public function showSetting($id){
+		$getExam = Exams::find($id);
+		$Name = $getExam->name;
+		app()->singleton('Title',function() use ($Name){
+			return $Name.' | '.trans('Titles.nameOfWebSite');
+		});
+		return view(app('admin').'.Setting',['getExam'=>$getExam]);
+	}
+	public function Students($id){
+		$getFinsh = Permission::where('id_exam',$id)->where('finish',1)->get();
+		$getExam = Exams::find($id);
+		foreach ($getFinsh as $Finish){
+			$getUsersFinish = Users::where('id_user',$Finish->id_user)->first();
+			$usersFinish[] = $getUsersFinish;	
+			$getResults[] = Results::where('id_user',$getUsersFinish['id'])->where('id_exam',$getExam->id)->where('result',1)->count();
+		}
+		app()->singleton('Title',function(){
+			return trans('Titles.Students');
+		});
+		return view(app('admin').'.Students',['usersFinish'=>$usersFinish,'getResults'=>$getResults,'getExam'=>$getExam]);
+	}
+	public function Result(Request $r,$id){
+		if ($r->input('result')=='True'){
 			$Right = 1;
 		}else{
 			$Right = 0;
 		}
-		$addNotes = Results::find($id);
-			$addNotes->notes = $r->input('notes');
-			$addNotes->result = $Right;
-		$addNotes->save();
-		return redirect('results/exam/'.$addNotes->id_exam);
+		$addResult = Results::find($id);
+			$addResult->result = $Right;
+		$addResult->save();
+	}
+	public function deleteExam($id){
+		Exams::where('id',$id)->delete();
+		Ques::where('id_exam',$id)->delete();
+		Permission::where('id_exam',$id)->delete();
+		Results::where('id_exam',$id)->delete();
+		return redirect('exams');
 	}
 }

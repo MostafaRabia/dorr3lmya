@@ -1,7 +1,7 @@
 @extends(app('users').'.Index')
 @section('center')
-{!! Html::style(app('css').'/createStyle.css') !!}
-{!! Html::script(app('js').'/createJs.min.js') !!}
+{!! Html::style(app('css').'/createStyle.css?version=1.1.0') !!}
+{!! Html::script(app('js').'/createJs.min.js?version=1.1.0') !!}
 <script type="text/javascript">
 	$(document).ready(function(){
 		@if(count($errors)>0||session()->has('pModal'))
@@ -28,6 +28,22 @@
 							<div class="input-field col s12"> 
 								<h5>{{trans('createExam.Name')}}</h5>
 								{!! Form::text('name','',['class'=>'validate']) !!}
+							</div>
+							<div class="input-field col s12"> 
+								<h5>{{trans('createExam.dateFrom')}}</h5>
+								<input type="text" class="datepicker" name='dateFrom'>
+							</div>
+							<div class="input-field col s12"> 
+								<h5>{{trans('createExam.dateTo')}}</h5>
+								<input type="text" class="datepicker" name="dateTo">
+							</div>
+							<div class="input-field col s12"> 
+								<h5>{{trans('createExam.timeFrom')}}</h5>
+								<input type="text" class="timepicker" name="timeFrom">
+							</div>
+							<div class="input-field col s12"> 
+								<h5>{{trans('createExam.timeTo')}}</h5>
+								<input type="text" class="timepicker" name="timeTo">
 							</div>
 							<div class="input-field col s12">
 								<h5>{{trans('createExam.Time')}}</h5>

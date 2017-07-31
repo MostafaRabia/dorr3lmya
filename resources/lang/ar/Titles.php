@@ -1,12 +1,13 @@
-<?php
-$nameOfWebSite = 'خير زاد';
+﻿<?php
+$nameOfWebSite = 'الدرر العلمية';
 return [
 	'nameOfWebSite' => $nameOfWebSite,
 	'Home' => 'الصفحة الرئيسية | '.$nameOfWebSite,
 	'Exam' => 'الامتحانات | '.$nameOfWebSite,
-	'createExam' => 'انشاء امتحان جديد | '.$nameOfWebSite,
+	'createExam' => 'إنشاء امتحان جديد | '.$nameOfWebSite,
 	'editExam' => 'تعديل الامتحان | '.$nameOfWebSite,
 	'editExamQuestion' => 'تعديل السؤال | '.$nameOfWebSite,
-	'Results' => 'الاجابات | '.$nameOfWebSite,
-	'addNotes' => 'اضافة ملاحظة | '.$nameOfWebSite,
+	'Results' => 'الإجابات | '.$nameOfWebSite,
+	'addNotes' => 'إضافة ملاحظة | '.$nameOfWebSite,
+	'Students' => 'الممتحنين | '.$nameOfWebSite,
 ];

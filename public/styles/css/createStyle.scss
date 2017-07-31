@@ -33,12 +33,11 @@ form p{
 /* Start Section Page */
 
 .pageSection{
-	background-color: #263238;
 	color: white;
 	.row{
 		margin-bottom: 0;
 		.asideLeft{
-			height: 105vh;
+			min-height: 100vh;
 			.input-field{
 				label{
 					left: initial;

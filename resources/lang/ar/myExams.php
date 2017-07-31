@@ -1,11 +1,14 @@
-<?php
+﻿<?php
 return [
 	'myExams' => 'امتحاناتي',
 	'Name' => 'الاسم',
-	'countQue' => 'عدد الاسألة',
-	'countAns' => 'عدد الاجابات الصحيحة',
+	'From' => 'من',
+	'To' => 'الي',
+	'countQue' => 'عدد الأسئة',
+	'countAns' => 'عدد الإجابات الصحيحة',
 	'Result' => 'النتيجة',
-	'enterExam' => 'الدخول للأمتحان',
+	'enterExam' => 'الدخول للامتحان',
 	'Ban' => 'BAN',
-	'enterAnswer' => 'رؤية الاجابات',
+	'enterAnswer' => 'رؤية الإجابات',
+	'notDate' => '----',
 ];

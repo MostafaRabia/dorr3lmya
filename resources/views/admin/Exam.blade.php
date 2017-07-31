@@ -1,6 +1,6 @@
 @extends(app('users').'.Index')
 @section('center')
-{!! Html::style(app('css').'/myExamsStyle.css') !!}
+{!! Html::style(app('css').'/myExamsStyle.css?version=1.1.0') !!}
 <!-- Start Section Page -->
 <section class="pageSection">
 	<div class="container">
@@ -11,29 +11,33 @@
 					<thead>
 						<tr>
 							<th>{{trans('Exam.Name')}}</th>
+							<th>{{trans('myExams.From')}}</th>
+							<th>{{trans('myExams.To')}}</th>
 							<th>{{trans('Exam.countQue')}}</th>
-							<th>{{trans('Exam.View')}}</th>
-							<th>{{trans('Exam.Edit')}}</th>
-							<th>{{trans('Exam.Results')}}</th>
+							<th>{{trans('Exam.Setting')}}</th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach($getExams as $Exam)
 							<tr>
 								<td>{{$Exam->name}}</td>
+								<td class="en">
+									@if($Exam->dateFrom!=null)
+										{{$Exam->dateFrom}} {{$Exam->timeFrom}}
+									@else
+										{{trans('myExams.notDate')}}
+									@endif
+								</td>
+								<td class="en">
+									@if($Exam->dateTo!=null)
+										{{$Exam->dateTo}} {{$Exam->timeTo}}
+									@else
+										{{trans('myExams.notDate')}}
+									@endif
+								</td>
 								<td>{{$Exam->ques}}</td>
 								<td>
-									<a class="btn-floating waves-effect waves-light teal lighten-1" href="{{url('show/exam')}}/{{$Exam->name}}">
-										<i class="material-icons">send</i>
-									</a>
-								</td>
-								<td>
-									<a class="btn-floating waves-effect waves-light 	red lighten-2" href="{{url('edit/exam')}}/{{$Exam->id}}">
-										<i class="material-icons">send</i>
-									</a>
-								</td>
-								<td>
-									<a class="btn-floating waves-effect waves-light 	deep-purple lighten-2" href="{{url('results/exam/')}}/{{$Exam->id}}">
+									<a class="btn-floating waves-effect waves-light teal lighten-1" href="{{url('setting/exam')}}/{{$Exam->id}}">
 										<i class="material-icons">send</i>
 									</a>
 								</td>

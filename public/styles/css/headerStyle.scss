@@ -34,16 +34,28 @@ nav{
 
 .pageSection{
     position: relative;
-    background-color: rgba(2,2,2,0.2) !important;
+    background-color: rgba(2,2,2,0.2);
     margin-top: 5px;
 }
+
+/* Start Section Image */
+
+.imageSection{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../../images/wallpaper.jpg");
+    background-size: cover;
+    position: fixed;
+}
+
+/* End Section Image */
 
 /* Start Section Black */
 
 .blackSection{
     position: fixed;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background-color: rgba(1,1,1,0.5);
 }
 

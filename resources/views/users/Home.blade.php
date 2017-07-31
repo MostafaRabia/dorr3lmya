@@ -1,6 +1,6 @@
 @extends(app('users').'.Index')
 @section('center')
-	{!! Html::style(app('css').'/homeStyle.css') !!}
+	{!! Html::style(app('css').'/homeStyle.css?version=1.1.0') !!}
 	<script type="text/javascript">
 		$(document).ready(function(){
 			@if(session()->has('Error'))
@@ -21,10 +21,10 @@
 	<section class="infoSection">
 		<div class="container">
 			<div class="row">
-				<div class="infoDiv">
-					<h4>{{trans('Home.Info')}}</h4>
+				<div class="infoDiv col s12 left">
+					<h4>{{trans('Home.Info')}} {{trans('Titles.nameOfWebSite')}}</h4>
 					<p class="flow-text">{!!trans('Home.Login')!!}</p>
-					<p class="flow-text">{{trans('Home.examNow')}} <a href='{{url("exam/".$getExams->name)}}'>{{$getExams->name}}</a></p>
+					<p class="flow-text">{{trans('Home.examNow')}} @if($getExams) <a href='{{url("exam/".$getExams->name)}}'>{{$getExams->name}}</a> @else {{trans('Home.noExam')}} @endif</p>
 					<p class="flow-text">{!!trans('Home.Rules')!!}</ul></p>
 					<img src="{{app('image')}}/home.png" />
 				</div>

@@ -8,6 +8,8 @@ class Exams extends Authenticatable
 {
     protected $table = 'exams';
     protected $fillable = [
-        'name', 'time', 'ques',
+        'name', 'time', 'dateFrom',
+        'dateTo', 'timeFrom', 'timeTo',
+        'ques', 'avil',
     ];
 }

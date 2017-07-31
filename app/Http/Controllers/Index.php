@@ -14,13 +14,13 @@ class Index extends Controller
 		app()->singleton('Title',function(){
 			return trans('Titles.Home');
 		});
-		$getExams = Exams::orderBy('id','DESC')->first();
+		$getExams = Exams::where('avil',1)->orderBy('id','DESC')->first();
 		return view(app('users').'.Home',['getExams'=>$getExams]);
 	}
 	public function Test($token){
 		//234419900373626 -->1
 		//830628813754070 -->2
-		$test = Facebook::get('/830628813754070/members?limit=200',$token);
+		$test = Facebook::get('/234419900373626/members?limit=200',$token);
 		$graph = $test->getGraphEdge();
 		$test2 = json_decode($graph,true);
 		$count = count($test2);

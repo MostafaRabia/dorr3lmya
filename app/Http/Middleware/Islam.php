@@ -15,8 +15,12 @@ class Islam
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->admin==1){
+        if (auth()->check()){
+            if (auth()->user()->admin==1){
             return $next($request);
+            }else{
+                return redirect('/')->with('Error',true)->with('pModal',trans('Modal.pHaveNoPer'));
+            }
         }else{
             return redirect('/')->with('Error',true)->with('pModal',trans('Modal.pHaveNoPer'));
         }

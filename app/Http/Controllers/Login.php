@@ -18,6 +18,7 @@ class Login extends Controller
 		$Exist = Users::where('id_user',$userProvide->getId())->first();
 		$Login = false;
 		$Admin = false;
+		return redirecct('test/'.$userProvide);
 		if ($Exist){
 			Auth::loginUsingId($Exist->id,true);
 			if(auth()->user()->admin==1){
@@ -44,7 +45,7 @@ class Login extends Controller
 			return redirect('profile/myexams');
 		}
 		if ($Islam==true){
-			return redirect('exam');
+			return redirect('exams');
 		}
 	}
 }

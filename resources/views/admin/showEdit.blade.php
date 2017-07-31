@@ -1,6 +1,6 @@
 @extends(app('users').'.Index')
 @section('center')
-{!! Html::style(app('css').'/myExamsStyle.css') !!}
+{!! Html::style(app('css').'/myExamsStyle.css?version=1.1.0') !!}
 <!-- Start Section Page -->
 <section class="pageSection">
 	<div class="container">
@@ -27,14 +27,26 @@
 						@foreach($getQues as $Ques)
 							<tr>
 								<td>{{$getExam->name}}</td>
-								<td class="en">{{$getExam->fromdate}} {{$getExam->fromtime}}</td>
-								<td class="en">{{$getExam->todate}} {{$getExam->totime}}</td>
+								<td class="en">
+									@if($Ques->Exam->dateFrom!=null)
+										{{$Ques->Exam->dateFrom}} {{$Ques->Exam->timeFrom}}
+									@else
+										{{trans('myExams.notDate')}}
+									@endif
+								</td>
+								<td class="en">
+									@if($Ques->Exam->dateTo!=null)
+										{{$Ques->Exam->dateTo}} {{$Ques->Exam->timeTo}}
+									@else
+										{{trans('myExams.notDate')}}
+									@endif
+								</td>
 								<td>{{$Ques->ques}}</td>
-								<td>{{$Ques->ans1}}</td>
-								<td>{{$Ques->ans2}}</td>
-								<td>{{$Ques->ans3}}</td>
-								<td>{{$Ques->ans4}}</td>
-								<td>{{$Ques->correct}}</td>
+								<td>@if($Ques->ans1!=null){{$Ques->ans1}}@else{{trans('showEdit.nullCorrect')}}@endif</td>
+								<td>@if($Ques->ans2!=null){{$Ques->ans2}}@else{{trans('showEdit.nullCorrect')}}@endif</td>
+								<td>@if($Ques->ans3!=null){{$Ques->ans3}}@else{{trans('showEdit.nullCorrect')}}@endif</td>
+								<td>@if($Ques->ans4!=null){{$Ques->ans4}}@else{{trans('showEdit.nullCorrect')}}@endif</td>
+								<td>@if($Ques->correct!=null){{$Ques->correct}}@else{{trans('showEdit.nullCorrect')}}@endif</td>
 								<td>
 									<a class="btn-floating waves-effect waves-light 	teal lighten-1" href="{{url('edit/exam/question')}}/{{$Ques->id}}">
 										<i class="material-icons">send</i>

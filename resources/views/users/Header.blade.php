@@ -5,31 +5,20 @@
         <link rel="icon" href="{{app('image')}}/books.png">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta charset="UTF-8"/>
+        <meta property="og:image" content="{{app('image')}}/preview.png" />
+        <meta property="og:description" content="الدرر العلمية لتعلم العلم الشرعي" />
         {!! Html::style(app('css').'/materialize.min.css') !!}
         {!! Html::style('https://fonts.googleapis.com/icon?family=Material+Icons') !!}
-        {!! Html::style(app('css').'/headerStyle.css') !!}
+        {!! Html::style(app('css').'/headerStyle.css?version=1.1.0') !!}
         {!! Html::script(app('js').'/jquery.js') !!}
         {!! Html::script(app('js').'/materialize.min.js') !!}
-        {!! Html::script(app('js').'/headerJs.min.js') !!}
+        {!! Html::script(app('js').'/headerJs.min.js?version=1.1.0') !!}
      </head>
      <script type="text/javascript">
          @if(session()->has('hi'))
             alert('hi');
          @endif
      </script>
-     <style type="text/css">
-        /* Start Section Image */
-
-        .imageSection{
-            width: 100vw;
-            height: 100vh;
-            background-image: url(data:image/jpeg;base64,{{base64_encode(file_get_contents('public/images/wallpaper.jpeg'))}});
-            background-size: cover;
-            position: fixed;
-        }
-        
-        /* End Section Image */
-    </style>
 <body style="overflow: hidden;">
     <!-- Start Section Loader -->
     <section class='loaderSection' id='loaderSection'>
@@ -50,7 +39,7 @@
     <nav>
         <div class="container">
             <div class="nav-wrapper">
-                <a href="{{url('/')}}" class="brand-logo center">{{trans('Titles.nameOfWebSite')}}</a>
+                <a href="{{url('/')}}" class="brand-logo">{{trans('Titles.nameOfWebSite')}}</a>
                 <a href="javascript:;" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul class="left hide-on-med-and-down">
                     @if(!auth()->check())
@@ -58,7 +47,7 @@
                     @elseif(auth()->check()&&auth()->user()->admin==0||auth()->user()->admin==2)
                         <li><a href="{{url('profile/myexams')}}">{{trans('myExams.myExams')}}</a></li>
                     @elseif(auth()->check()&&auth()->user()->admin==1)
-                        <li><a href="{{url('exam')}}">{{trans('Header.Exam')}}</a></li>
+                        <li><a href="{{url('exams')}}">{{trans('Header.Exam')}}</a></li>
                         <li><a href="{{url('create/exam')}}">{{trans('Header.createExam')}}</a></li>
                     @endif
                 </ul>
@@ -68,7 +57,7 @@
                     @elseif(auth()->check()&&auth()->user()->admin==0||auth()->user()->admin==2)
                         <li><a href="{{url('profile/myexams')}}">{{trans('myExams.myExams')}}</a></li>
                     @elseif(auth()->check()&&auth()->user()->admin==1)
-                        <li><a href="{{url('exam')}}">{{trans('Header.Exam')}}</a></li>
+                        <li><a href="{{url('exams')}}">{{trans('Header.Exam')}}</a></li>
                         <li><a href="{{url('create/exam')}}">{{trans('Header.createExam')}}</a></li>
                     @endif
                 </ul>
