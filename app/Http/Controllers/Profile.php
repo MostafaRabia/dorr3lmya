@@ -20,8 +20,10 @@ class Profile extends Controller
 	public function showEnterExam($Name){
 		$getId = Exams::where('name',$Name)->first();
 		$getPermission = Permission::where('id_exam',$getId->id)->where('id_user',auth()->user()->id_user)->first();
-		if ($getPermission->ban==1||$getPermission->finish==1||$getId->avil==0){
-			return redirect()->back();
+		if ($getPermission){
+			if ($getPermission->ban==1||$getPermission->finish==1||$getId->avil==0){
+				return redirect()->back();
+			}
 		}
 		$getQues = Ques::where('id_exam',$getId->id)->inRandomOrder()->get();
 		app()->singleton('Title',function() use ($Name){

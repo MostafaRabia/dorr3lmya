@@ -32,8 +32,8 @@ Route::group(['middleware'=>'Islam'],function(){
 	Route::get('edit/exam/question/{id}','Exam@showEditExamQuestion');
 	Route::get('delete/question/{id}','Exam@deleteQue');
 	Route::get('show/exam/{name}','Exam@showExam');
-	Route::get('results/exam/{id}','Exam@Results');
-	Route::get('results/{id}','Exam@Results');
+	Route::get('results/exam/{id}','Exam@showResults');
+	Route::get('results/exam/{id}/{user}','Exam@Results');
 	Route::get('notes/{id}','Exam@showNotes');
 	Route::get('stop/{id}','Exam@Stop');
 	Route::get('setting/exam/{id}','Exam@showSetting');

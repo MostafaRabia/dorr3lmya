@@ -155,8 +155,20 @@ class Exam extends Controller
 		});
 		return view(app('admin').'.showExam',['getQues'=>$getQues,'name'=>$Name,'getId'=>$getId]);
 	}
-	public function Results($id){
-		$getResults = Results::where('id_exam',$id)->paginate(5);
+	public function showResults($id){
+		$getFinsh = Permission::where('id_exam',$id)->where('finish',1)->get();
+		$getExam = Exams::find($id);
+		foreach ($getFinsh as $Finish){
+			$getUsersFinish = Users::where('id_user',$Finish->id_user)->first();
+			$usersFinish[] = $getUsersFinish;	
+		}
+		app()->singleton('Title',function(){
+			return trans('Titles.Results');
+		});
+		return view(app('admin').'.usersFinish',['usersFinish'=>$usersFinish,'getExam'=>$getExam]);
+	}
+	public function Results($id,$User){
+		$getResults = Results::where('id_exam',$id)->where('id_user',$User)->get();
 		app()->singleton('Title',function(){
 			return trans('Titles.Results');
 		});

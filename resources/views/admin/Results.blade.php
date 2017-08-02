@@ -51,9 +51,6 @@
 					</h5>
 					<hr>
 				@endforeach
-				<!-- Start Pagination -->
-				{{$getResults->links()}}
-			    <!-- End Pagination -->
 			</div>
 		</div>
 	</div>

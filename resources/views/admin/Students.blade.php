@@ -18,7 +18,7 @@
 					<tbody>
 						@for($i=0;$i<count($usersFinish);$i++)
 							<tr>
-								<td>{{$usersFinish[$i]['username']}}</td>
+								<td>{{$usersFinish[$i]['username']}}</a></td>
 								<td>{{$getResults[$i]}}/{{$getExam->ques}}</td>
 							</tr>
 						@endfor
