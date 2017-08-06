@@ -14,4 +14,5 @@ return [
 	'Students' => 'الممتحنين',
 	'deleteExam' => 'حذف الامتحان',
 	'addQue' => 'اضافة سؤال',
+	'copyExam' => 'نسخ الامتحان',
 ];

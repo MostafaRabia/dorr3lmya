@@ -72,6 +72,14 @@
 								{!! Form::text('correct','',['class'=>'validate']) !!}
 							</div>
 							<div class="input-field col s12">
+								<h5>{{trans('createExam.trueNote')}}</h5>
+								{!! Form::text('truenote','',['class'=>'validate']) !!}
+							</div>
+							<div class="input-field col s12">
+								<h5>{{trans('createExam.falseNote')}}</h5>
+								{!! Form::text('falsenote','',['class'=>'validate']) !!}
+							</div>
+							<div class="input-field col s12">
 								<button class="btn waves-effect waves-light" type="submit">	 {{trans('createExam.Submit')}}
 									<i class="material-icons right">send</i>
 								</button>

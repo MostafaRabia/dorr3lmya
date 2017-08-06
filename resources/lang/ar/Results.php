@@ -8,6 +8,5 @@ return [
 	'Fail' => 'خطأ',
 	'Notes' => 'ملاحظات: ',
 	'Correct' => 'الإجابة الصحيحة: ',
-	'nullCorrect' => '----',
-	'Pending' => '----',
+	'Null' => '----',
 ];

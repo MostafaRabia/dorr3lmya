@@ -7,4 +7,6 @@ return [
 	'Ans4' => 'إجابة 4',
 	'Correct' => 'الإجابة الصحيحة',
 	'nullCorrect' => '----',
+	'Notes' => 'ملاحظات',
+	'nullNote' => '----'
 ];

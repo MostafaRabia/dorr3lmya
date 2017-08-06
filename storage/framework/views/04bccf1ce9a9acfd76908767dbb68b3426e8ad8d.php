@@ -1,5 +1,5 @@
 <?php $__env->startSection('center'); ?>
-<?php echo Html::style(app('css').'/myExamsStyle.css?version=1.0.1'); ?>
+<?php echo Html::style(app('css').'/myExamsStyle.css?version=1.1.0'); ?>
 
 <!-- Start Section Page -->
 <section class="pageSection">

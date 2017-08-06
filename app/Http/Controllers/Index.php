@@ -36,6 +36,9 @@ class Index extends Controller
 		echo $count;
 	}
 	public function Artisan($Artisan){
-		Artisan::call($Artisan);
+		return Artisan::call($Artisan);
+	}
+	public function Schedule(){
+		Artisan::call('schedule:run');
 	}
 }

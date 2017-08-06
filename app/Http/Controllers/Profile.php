@@ -20,10 +20,8 @@ class Profile extends Controller
 	public function showEnterExam($Name){
 		$getId = Exams::where('name',$Name)->first();
 		$getPermission = Permission::where('id_exam',$getId->id)->where('id_user',auth()->user()->id_user)->first();
-		if ($getPermission){
-			if ($getPermission->ban==1||$getPermission->finish==1||$getId->avil==0){
-				return redirect()->back();
-			}
+		if ($getPermission->ban==1||$getPermission->finish==1||$getId->avil==0){
+			return redirect()->back();
 		}
 		$getQues = Ques::where('id_exam',$getId->id)->inRandomOrder()->get();
 		app()->singleton('Title',function() use ($Name){
@@ -33,6 +31,7 @@ class Profile extends Controller
 	}
 	public function enterExam(Request $r,$Name){
 		$getId = Exams::where('name',$Name)->first();
+		Permission::where('id_user',auth()->user()->id_user)->where('id_exam',$getId->id)->update(['finish'=>1]);
 		if ($r->has('ban')){
 			Permission::where('id_user',auth()->user()->id_user)->where('id_exam',$getId->id)->update(['ban'=>1]);
 		}
@@ -44,12 +43,19 @@ class Profile extends Controller
 			$getQues[] = $explodes[$i][1];
 		}
 		foreach ($getQues as $key){
+			$Note = '----';
 			$getQue = Ques::where('id_query',$key)->where('id_exam',$getId->id)->first();
 			if ($getQue->correct){
 				if ($r->input($explodes[$key - 1][0].'_'.$explodes[$key - 1][1])==$getQue->correct){
 					$Right = 1;
+					if ($getQue->trueNote){
+						$Note = $getQue->trueNote;
+					}
 				}else{
 					$Right = 0;
+					if ($getQue->falseNote){
+						$Note = $getQue->falseNote;
+					}
 				}
 			}else{
 				$Right = 2;
@@ -59,11 +65,10 @@ class Profile extends Controller
 				$addResult->id_user = auth()->user()->id;
 				$addResult->question = $getQue->id_que;
 				$addResult->answer = $r->input($explodes[$key - 1][0].'_'.$explodes[$key - 1][1]);
-				$addResult->notes = '----';
+				$addResult->notes = $Note;
 				$addResult->result = $Right;
 			$addResult->save();
 		}
-		Permission::where('id_user',auth()->user()->id_user)->where('id_exam',$getId->id)->update(['finish'=>1]);
 		return redirect('results/'.$getQue->Exam->name);
 	}
 	public function showResults($Name){
@@ -75,3 +80,4 @@ class Profile extends Controller
 		return view(app('users').'.Results',['getResults'=>$getResults]);
 	}
 }
+

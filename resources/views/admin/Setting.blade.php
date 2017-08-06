@@ -19,6 +19,7 @@
 							<th>{{trans('Exam.Students')}}</th>
 							<th>{{trans('Exam.deleteExam')}}</th>
 							<th>{{trans('Exam.addQue')}}</th>
+							<th>{{trans('Exam.copyExam')}}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -61,6 +62,11 @@
 							</td>
 							<td>
 								<a class="btn-floating waves-effect waves-light green darken-4" href="{{url('create/exam/')}}/{{$getExam->id}}">
+									<i class="material-icons">send</i>
+								</a>
+							</td>
+							<td>
+								<a class="btn-floating waves-effect waves-light red" href="{{url('copy/exam/')}}/{{$getExam->id}}">
 									<i class="material-icons">send</i>
 								</a>
 							</td>

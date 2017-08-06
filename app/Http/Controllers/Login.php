@@ -18,13 +18,13 @@ class Login extends Controller
 		$Exist = Users::where('id_user',$userProvide->getId())->first();
 		$Login = false;
 		$Admin = false;
-		return redirecct('test/'.$userProvide);
 		if ($Exist){
 			Auth::loginUsingId($Exist->id,true);
 			if(auth()->user()->admin==1){
 				$Islam = true;
+			}else{
+				$Login = true;
 			}
-			$Login = true;
 		}else{
 			$existIdMember = Member::where('id_member',$userProvide->getId())->first();
 			if ($existIdMember){
@@ -49,3 +49,4 @@ class Login extends Controller
 		}
 	}
 }
+

@@ -35,14 +35,22 @@ class Exam extends Controller
 		if ($Validate->fails()){
 			return redirect()->back()->with('pModal',trans('Modal.pErrorModalCreateExamQues'))->withErrors($Validate)->withInput();
 		}else{
+			$dateFrom = null;
+			$dateTo = null;
+			if ($r->has('dateFrom')){
+				$dateFrom = explode(',',$r->input('dateFrom'));
+			}
+			if ($r->has('dateTo')){
+				$dateTo = explode(',',$r->input('dateTo'));
+			}
 			$addExam = new Exams;
 				$addExam->name = $r->input('name');
 				$addExam->time = $r->input('time');
-				$addExam->dateFrom = $r->input('dateFrom');
-				$addExam->dateTo = $r->input('dateTo');
+				$addExam->dateFrom = $dateFrom[0].$dateFrom[1].' '.$r->input('timeFrom');
+				$addExam->dateTo = $dateTo[0].$dateTo[1].' '.$r->input('timeTo');
 				$addExam->timeFrom = $r->input('timeFrom');
 				$addExam->timeTo = $r->input('timeTo');
-				$addExam->avil = 1;
+				$addExam->avil = 0;
 			$addExam->save();
 			$idExam = $addExam->id;
 			$getMembers = Member::get();
@@ -87,6 +95,8 @@ class Exam extends Controller
 				$addQues->ans3 = $r->input('ans3');
 				$addQues->ans4 = $r->input('ans4');
 				$addQues->correct = $r->input('correct');
+				$addQues->trueNote = $r->input('truenote');
+				$addQues->falseNote = $r->input('falsenote');
 			$addQues->save();
 			$addCountQues = Exams::find($id);
 				$addCountQues->ques++;
@@ -122,10 +132,18 @@ class Exam extends Controller
 		if ($Validate->fails()){
 			return redirect()->back()->with('pModal',trans('Modal.pErrorModalEditExamQues'))->withErrors($Validate)->withInput();
 		}else{
+			$dateFrom = null;
+			$dateTo = null;
+			if ($r->has('dateFrom')){
+				$dateFrom = explode(',',$r->input('dateFrom'));
+			}
+			if ($r->has('dateTo')){
+				$dateTo = explode(',',$r->input('dateTo'));
+			}
 			$getQuesAndExam->Exam->name = $r->input('name');
 			$getQuesAndExam->Exam->time = $r->input('time');
-			$getQuesAndExam->Exam->dateFrom = $r->input('dateFrom');
-			$getQuesAndExam->Exam->dateTo = $r->input('dateTo');
+			$getQuesAndExam->Exam->dateFrom = $dateFrom[0].$dateFrom[1].' '.$r->input('timeFrom');
+			$getQuesAndExam->Exam->dateTo = $dateTo[0].$dateTo[1].' '.$r->input('timeTo');
 			$getQuesAndExam->Exam->timeFrom = $r->input('timeFrom');
 			$getQuesAndExam->Exam->timeTo = $r->input('timeTo');
 			$getQuesAndExam->ques = $r->input('ques');
@@ -134,9 +152,11 @@ class Exam extends Controller
 			$getQuesAndExam->ans3 = $r->input('ans3');
 			$getQuesAndExam->ans4 = $r->input('ans4');
 			$getQuesAndExam->correct = $r->input('correct');
+			$getQuesAndExam->trueNote = $r->input('truenote');
+			$getQuesAndExam->falseNote = $r->input('falsenote');
 			$getQuesAndExam->save();
 			$getQuesAndExam->Exam->save();
-			return redirect('edit/exam/'.$id);
+			return redirect('edit/exam/'.$getQuesAndExam->Exam->id);
 		}
 	}
 	public function deleteQue($id){
@@ -233,6 +253,73 @@ class Exam extends Controller
 		Ques::where('id_exam',$id)->delete();
 		Permission::where('id_exam',$id)->delete();
 		Results::where('id_exam',$id)->delete();
+		return redirect('exams');
+	}
+	public function Update($id){
+		$getMember = Member::get();
+		foreach ($getMember as $Member) {
+			$getPermission = Permission::where('id_user',$Member->id_member)->where('id_exam',$id)->first();
+			if ($getPermission){}else{
+				$addPermission = new Permission;
+					$addPermission->id_exam = $id;
+					$addPermission->id_user = $Member->id_member;
+					$addPermission->ban = 0; 
+					$addPermission->complete = 0; 
+					$addPermission->finish = 0;
+				$addPermission->save(); 
+				echo 'done';
+			}						
+		}
+	}
+	public function copyExam($id){
+		$getExam = Exams::find($id);
+		$newExam = new Exams;
+			$newExam->name = $getExam->name.'(copied)';
+			$newExam->time = $getExam->time;
+			$newExam->dateFrom = $getExam->dateFrom;
+			$newExam->dateTo = $getExam->dateTo;
+			$newExam->timeFrom = $getExam->timeFrom;
+			$newExam->timeTo = $getExam->timeTo;
+			$newExam->ques = $getExam->ques;
+			$newExam->avil = $getExam->avil;
+		$newExam->save();
+		$idNewExam = $newExam->id;
+		$getQues = Ques::where('id_exam',$id)->get();
+		foreach ($getQues as $Ques){
+			$newQues = new Ques;
+				$newQues->id_exam = $idNewExam;
+				$newQues->id_que = $Ques->id_que;
+				$newQues->id_query = $Ques->id_query;
+				$newQues->ques = $Ques->ques;
+				$newQues->ans1 = $Ques->ans1;
+				$newQues->ans2 = $Ques->ans2;
+				$newQues->ans3 = $Ques->ans3;
+				$newQues->ans4 = $Ques->ans4;
+				$newQues->correct = $Ques->correct;
+				$newQues->note = $Ques->note;
+			$newQues->save();
+		}
+		$getResults = Results::where('id_exam',$id)->get();
+		foreach ($getResults as $Result){
+			$newResult = new Results;
+				$newResult->id_exam = $idNewExam;
+				$newResult->id_user = $Result->id_user;
+				$newResult->question = $Result->question;
+				$newResult->answer = $Result->answer;
+				$newResult->notes = $Result->notes;
+				$newResult->result = $Result->result;
+			$newResult->save();
+		}
+		$getPermission = Permission::where('id_exam',$id)->get();
+		foreach ($getPermission as $Permission){
+			$newPermission = new Permission;
+				$newPermission->id_exam = $idNewExam;
+				$newPermission->id_user = $Permission->id_user;
+				$newPermission->complete = $Permission->complete;
+				$newPermission->finish = $Permission->finish;
+				$newPermission->ban = $Permission->ban;
+			$newPermission->save();
+		}
 		return redirect('exams');
 	}
 }

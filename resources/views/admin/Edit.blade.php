@@ -73,6 +73,14 @@
 						{!! Form::text('correct',$getQue->correct,['class'=>'validate valid']) !!}
 					</div>
 					<div class="input-field col s12">
+						<h5>{{trans('createExam.trueNote')}}</h5>
+						{!! Form::text('truenote',$getQue->trueNote,['class'=>'validate valid']) !!}
+					</div>
+					<div class="input-field col s12">
+						<h5>{{trans('createExam.falseNote')}}</h5>
+						{!! Form::text('falsenote',$getQue->falseNote,['class'=>'validate valid']) !!}
+					</div>
+					<div class="input-field col s12">
 						<button class="btn waves-effect waves-light" type="submit">	 {{trans('editQue.Submit')}}
 							<i class="material-icons right">send</i>
 						</button>

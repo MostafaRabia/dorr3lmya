@@ -43,14 +43,14 @@
 								<td>{{$Exam->name}}</td>
 								<td class="en">
 									@if($Exam->dateFrom!=null)
-										{{$Exam->dateFrom}} {{$Exam->timeFrom}}
+										{{$Exam->dateFrom}}
 									@else
 										{{trans('myExams.notDate')}}
 									@endif
 								</td>
 								<td class="en">
 									@if($Exam->dateTo!=null)
-										{{$Exam->dateTo}} {{$Exam->timeTo}}
+										{{$Exam->dateTo}}
 									@else
 										{{trans('myExams.notDate')}}
 									@endif
@@ -58,21 +58,13 @@
 								<td>{{$Exam->ques}}</td>
 								<td>{{$countAns}}</td>
 								<td>{{$countAns}}/{{$Exam->ques}}</td>
-								@if ($getPermission)
-									@if ($getPermission->ban==1)
-										<td>{{trans('myExams.Ban')}}</td>
-									@elseif ($getPermission->ban==0&&$getPermission->enter==0&&$getPermission->finish==0&&$Exam->avil==1)
-										<td><a class="btn-floating waves-effect waves-light teal lighten-1 enter" href="{{url('exam')}}/{{$Exam->name}}">
-											<i class="material-icons">send</i>
-										</a></td>
-									@elseif ($getPermission->finish==1&&$getPermission->ban==0)
-										<td></td>
-										<td><a class="btn-floating waves-effect waves-light teal lighten-1" href="{{url('results')}}/{{$Exam->name}}">
-											<i class="material-icons">send</i>
-										</a></td>
-									@endif
-								@endif
-								@if ($Exam->avil==0)
+								@if ($getPermission->ban==1)
+									<td>{{trans('myExams.Ban')}}</td>
+								@elseif ($getPermission->ban==0&&$getPermission->enter==0&&$getPermission->finish==0&&$Exam->avil==1)
+									<td><a class="btn-floating waves-effect waves-light teal lighten-1 enter" href="{{url('exam')}}/{{$Exam->name}}">
+										<i class="material-icons">send</i>
+									</a></td>
+								@elseif ($getPermission->finish==1&&$getPermission->ban==0||$Exam->avil==0)
 									<td></td>
 									<td><a class="btn-floating waves-effect waves-light teal lighten-1" href="{{url('results')}}/{{$Exam->name}}">
 										<i class="material-icons">send</i>

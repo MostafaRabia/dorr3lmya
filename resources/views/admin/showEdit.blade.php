@@ -29,14 +29,14 @@
 								<td>{{$getExam->name}}</td>
 								<td class="en">
 									@if($Ques->Exam->dateFrom!=null)
-										{{$Ques->Exam->dateFrom}} {{$Ques->Exam->timeFrom}}
+										{{$Ques->Exam->dateFrom}}
 									@else
 										{{trans('myExams.notDate')}}
 									@endif
 								</td>
 								<td class="en">
 									@if($Ques->Exam->dateTo!=null)
-										{{$Ques->Exam->dateTo}} {{$Ques->Exam->timeTo}}
+										{{$Ques->Exam->dateTo}}
 									@else
 										{{trans('myExams.notDate')}}
 									@endif

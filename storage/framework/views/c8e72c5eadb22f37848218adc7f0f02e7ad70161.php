@@ -81,6 +81,16 @@
 
 							</div>
 							<div class="input-field col s12">
+								<h5><?php echo e(trans('createExam.trueNote')); ?></h5>
+								<?php echo Form::text('truenote','',['class'=>'validate']); ?>
+
+							</div>
+							<div class="input-field col s12">
+								<h5><?php echo e(trans('createExam.falseNote')); ?></h5>
+								<?php echo Form::text('falsenote','',['class'=>'validate']); ?>
+
+							</div>
+							<div class="input-field col s12">
 								<button class="btn waves-effect waves-light" type="submit">	 <?php echo e(trans('createExam.Submit')); ?>
 
 									<i class="material-icons right">send</i>

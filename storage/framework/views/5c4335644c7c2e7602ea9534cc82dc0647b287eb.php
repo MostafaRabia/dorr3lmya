@@ -1,5 +1,5 @@
 <?php $__env->startSection('center'); ?>
-<?php echo Html::style(app('css').'/showExamStyleUsers.css?version=1.1.0'); ?>
+<?php echo Html::style(app('css').'/showExamStyleUsers.css?version=1.1.1'); ?>
 
 <?php echo Html::script(app('js').'/js.cookie.min.js?version=1.1.0'); ?>
 
@@ -14,39 +14,39 @@
 				<?php echo Form::open(['url'=>'exam/'.$getId->name,'method'=>'post']); ?>
 
 				<?php  $i=0; $b=0;  ?>
-				<?php $__currentLoopData = $getQues; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $Ques): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-					<?php  $i++; $b++;  ?>
-					<h5><?php echo e(trans('showExam.Que')); ?><?php echo e($b); ?>: <?php echo e($Ques->ques); ?></h5>
-					<h5><?php echo e(trans('showExam.Ans')); ?></h5>
-					<?php if($Ques->ans1!=null&&$Ques->ans2!=null): ?>
-					<p>
-						<input name="ans.<?php echo e($Ques->id_query); ?>" type="radio" id="<?php echo e($i); ?>" value="<?php echo e($Ques->ans1); ?>" />
-						<label for="<?php echo e($i); ?>"><?php echo e($Ques->ans1); ?></label>
-						<?php  $i++  ?>
-					</p>
-					<p>
-						<input name="ans.<?php echo e($Ques->id_query); ?>" type="radio" id="<?php echo e($i); ?>" value="<?php echo e($Ques->ans2); ?>" />
-						<label for="<?php echo e($i); ?>"><?php echo e($Ques->ans2); ?></label>
-						<?php  $i++  ?>
-					</p>
-					<?php elseif($Ques->correct==null): ?>
-						<textarea id="textarea1" name='ans.<?php echo e($Ques->id_query); ?>' class="materialize-textarea"></textarea>
-					<?php endif; ?>
-					<?php if($Ques->ans3!=null): ?>
-						<p>
-							<input name="ans.<?php echo e($Ques->id_query); ?>" type="radio" id="<?php echo e($i); ?>" value="<?php echo e($Ques->ans3); ?>" />
-							<label for="<?php echo e($i); ?>"><?php echo e($Ques->ans3); ?></label>
-							<?php  $i++  ?>
-						</p>
-					<?php endif; ?>
-					<?php if($Ques->ans4!=null): ?>
-						<p>
-							<input name="ans.<?php echo e($Ques->id_query); ?>" type="radio" id="<?php echo e($i); ?>" value="<?php echo e($Ques->ans4); ?>" />
-							<label for="<?php echo e($i); ?>"><?php echo e($Ques->ans4); ?></label>
-							<?php  $i++  ?>
-						</p>
-					<?php endif; ?>
-					<hr>
+					<?php $__currentLoopData = $getQues; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $Ques): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+						<?php  $i++; $b++;  ?>
+						<h5><?php echo e(trans('showExam.Que')); ?><?php echo e($b); ?>: <?php echo e($Ques->ques); ?></h5>
+						<h5><?php echo e(trans('showExam.Ans')); ?></h5>
+						<?php if($Ques->ans1!=null&&$Ques->ans2!=null): ?>
+							<p>
+								<input name="ans.<?php echo e($Ques->id_query); ?>" type="radio" id="<?php echo e($i); ?>" value="<?php echo e($Ques->ans1); ?>" />
+								<label for="<?php echo e($i); ?>"><?php echo e($Ques->ans1); ?></label>
+								<?php  $i++  ?>
+							</p>
+							<p>
+								<input name="ans.<?php echo e($Ques->id_query); ?>" type="radio" id="<?php echo e($i); ?>" value="<?php echo e($Ques->ans2); ?>" />
+								<label for="<?php echo e($i); ?>"><?php echo e($Ques->ans2); ?></label>
+								<?php  $i++  ?>
+							</p>
+						<?php elseif($Ques->correct==null): ?>
+							<textarea id="textarea1" name='ans.<?php echo e($Ques->id_query); ?>' class="materialize-textarea"></textarea>
+						<?php endif; ?>
+						<?php if($Ques->ans3!=null): ?>
+							<p>
+								<input name="ans.<?php echo e($Ques->id_query); ?>" type="radio" id="<?php echo e($i); ?>" value="<?php echo e($Ques->ans3); ?>" />
+								<label for="<?php echo e($i); ?>"><?php echo e($Ques->ans3); ?></label>
+								<?php  $i++  ?>
+							</p>
+						<?php endif; ?>
+						<?php if($Ques->ans4!=null): ?>
+							<p>
+								<input name="ans.<?php echo e($Ques->id_query); ?>" type="radio" id="<?php echo e($i); ?>" value="<?php echo e($Ques->ans4); ?>" />
+								<label for="<?php echo e($i); ?>"><?php echo e($Ques->ans4); ?></label>
+								<?php  $i++  ?>
+							</p>
+						<?php endif; ?>
+						<hr>
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					<button class="btn waves-effect waves-light" type="submit">
 						<?php echo e(trans('showExam.Finish')); ?>
@@ -55,7 +55,7 @@
 					</button>
 				<?php echo Form::close(); ?>
 
-				</div>
+			</div>
 		</div>
 	</div>
 </section>

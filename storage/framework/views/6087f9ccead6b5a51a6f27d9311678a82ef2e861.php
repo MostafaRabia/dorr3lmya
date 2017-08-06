@@ -16,7 +16,7 @@
 						<?php echo e(trans('Results.Correct')); ?>
 
 						<?php if($Results->Ques->correct==null): ?>
-							<?php echo e(trans('Results.nullCorrect')); ?>
+							<?php echo e(trans('Results.Null')); ?>
 
 						<?php else: ?>
 							<?php echo e($Results->Ques->correct); ?>
@@ -30,20 +30,29 @@
 							<?php echo e(trans('Results.Success')); ?>
 
 						<?php elseif($Results->result==2): ?>
-							<?php echo e(trans('Results.Pending')); ?>
+							<?php echo e(trans('Results.Null')); ?>
 
 						<?php else: ?>
 							<?php echo e(trans('Results.Fail')); ?>
 
 						<?php endif; ?>
 					 </h5>
-					 <h5><?php echo e(trans('Results.Notes')); ?> <?php echo e($Results->notes); ?></h5>
+					 <h5>
+					 	<?php echo e(trans('Results.Notes')); ?>
+
+					 	<?php if($Results->Ques->trueNote!=null&&$Results->result==1): ?>
+					 		<?php echo e($Results->Ques->trueNote); ?>
+
+					 	<?php elseif($Results->Ques->falseNote!=null&&$Results->result==0): ?>
+					 		<?php echo e($Results->Ques->falseNote); ?>
+
+					 	<?php else: ?>
+					 		<?php echo e(trans('Results.Null')); ?>
+
+					 	<?php endif; ?>
+					 </h5>
 					 <hr>
 				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-				<!-- Start Pagination -->
-				<?php echo e($getResults->links()); ?>
-
-			    <!-- End Pagination -->
 			</div>
 		</div>
 	</div>

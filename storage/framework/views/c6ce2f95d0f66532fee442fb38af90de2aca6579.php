@@ -20,6 +20,7 @@
 							<th><?php echo e(trans('Exam.Students')); ?></th>
 							<th><?php echo e(trans('Exam.deleteExam')); ?></th>
 							<th><?php echo e(trans('Exam.addQue')); ?></th>
+							<th><?php echo e(trans('Exam.copyExam')); ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -62,6 +63,11 @@
 							</td>
 							<td>
 								<a class="btn-floating waves-effect waves-light green darken-4" href="<?php echo e(url('create/exam/')); ?>/<?php echo e($getExam->id); ?>">
+									<i class="material-icons">send</i>
+								</a>
+							</td>
+							<td>
+								<a class="btn-floating waves-effect waves-light red" href="<?php echo e(url('copy/exam/')); ?>/<?php echo e($getExam->id); ?>">
 									<i class="material-icons">send</i>
 								</a>
 							</td>

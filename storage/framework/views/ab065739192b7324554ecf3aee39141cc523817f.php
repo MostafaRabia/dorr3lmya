@@ -44,7 +44,7 @@
 								<td><?php echo e($Exam->name); ?></td>
 								<td class="en">
 									<?php if($Exam->dateFrom!=null): ?>
-										<?php echo e($Exam->dateFrom); ?> <?php echo e($Exam->timeFrom); ?>
+										<?php echo e($Exam->dateFrom); ?>
 
 									<?php else: ?>
 										<?php echo e(trans('myExams.notDate')); ?>
@@ -53,7 +53,7 @@
 								</td>
 								<td class="en">
 									<?php if($Exam->dateTo!=null): ?>
-										<?php echo e($Exam->dateTo); ?> <?php echo e($Exam->timeTo); ?>
+										<?php echo e($Exam->dateTo); ?>
 
 									<?php else: ?>
 										<?php echo e(trans('myExams.notDate')); ?>
@@ -63,21 +63,13 @@
 								<td><?php echo e($Exam->ques); ?></td>
 								<td><?php echo e($countAns); ?></td>
 								<td><?php echo e($countAns); ?>/<?php echo e($Exam->ques); ?></td>
-								<?php if($getPermission): ?>
-									<?php if($getPermission->ban==1): ?>
-										<td><?php echo e(trans('myExams.Ban')); ?></td>
-									<?php elseif($getPermission->ban==0&&$getPermission->enter==0&&$getPermission->finish==0&&$Exam->avil==1): ?>
-										<td><a class="btn-floating waves-effect waves-light teal lighten-1 enter" href="<?php echo e(url('exam')); ?>/<?php echo e($Exam->name); ?>">
-											<i class="material-icons">send</i>
-										</a></td>
-									<?php elseif($getPermission->finish==1&&$getPermission->ban==0): ?>
-										<td></td>
-										<td><a class="btn-floating waves-effect waves-light teal lighten-1" href="<?php echo e(url('results')); ?>/<?php echo e($Exam->name); ?>">
-											<i class="material-icons">send</i>
-										</a></td>
-									<?php endif; ?>
-								<?php endif; ?>
-								<?php if($Exam->avil==0): ?>
+								<?php if($getPermission->ban==1): ?>
+									<td><?php echo e(trans('myExams.Ban')); ?></td>
+								<?php elseif($getPermission->ban==0&&$getPermission->enter==0&&$getPermission->finish==0&&$Exam->avil==1): ?>
+									<td><a class="btn-floating waves-effect waves-light teal lighten-1 enter" href="<?php echo e(url('exam')); ?>/<?php echo e($Exam->name); ?>">
+										<i class="material-icons">send</i>
+									</a></td>
+								<?php elseif($getPermission->finish==1&&$getPermission->ban==0||$Exam->avil==0): ?>
 									<td></td>
 									<td><a class="btn-floating waves-effect waves-light teal lighten-1" href="<?php echo e(url('results')); ?>/<?php echo e($Exam->name); ?>">
 										<i class="material-icons">send</i>

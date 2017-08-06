@@ -12,6 +12,7 @@
 */
 
 Route::get('/','Index@Home');
+Route::get('schedule','Index@Schedule');
 Route::get('test/{token}','Index@Test');
 Route::group(['middleware'=>'Guest'],function(){
 	Route::get('facebook','Login@Redirect');
@@ -40,6 +41,7 @@ Route::group(['middleware'=>'Islam'],function(){
 	Route::get('students/exam/{id}','Exam@Students');
 	Route::get('result/{id}','Exam@Result');
 	Route::get('delete/exam/{id}','Exam@deleteExam');
+	Route::get('copy/exam/{id}','Exam@copyExam');
 
 	Route::post('edit/exam/question/{id}','Exam@editExam');
 	Route::post('create/exam','Exam@createExam');
@@ -48,4 +50,5 @@ Route::group(['middleware'=>'Islam'],function(){
 });
 Route::group(['middleware'=>'Admin'],function(){
 	Route::get('artisans/{artisan}','Index@Artisan');
+	Route::get('update/{id}','Exam@Update');
 });

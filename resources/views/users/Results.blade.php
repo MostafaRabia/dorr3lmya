@@ -14,7 +14,7 @@
 					<h5>
 						{{trans('Results.Correct')}}
 						@if($Results->Ques->correct==null)
-							{{trans('Results.nullCorrect')}}
+							{{trans('Results.Null')}}
 						@else
 							{{$Results->Ques->correct}}
 						@endif
@@ -24,12 +24,21 @@
 						@if($Results->result==1)
 							{{trans('Results.Success')}}
 						@elseif($Results->result==2)
-							{{trans('Results.Pending')}}
+							{{trans('Results.Null')}}
 						@else
 							{{trans('Results.Fail')}}
 						@endif
 					 </h5>
-					 <h5>{{trans('Results.Notes')}} {{$Results->notes}}</h5>
+					 <h5>
+					 	{{trans('Results.Notes')}}
+					 	@if($Results->Ques->trueNote!=null&&$Results->result==1)
+					 		{{$Results->Ques->trueNote}}
+					 	@elseif($Results->Ques->falseNote!=null&&$Results->result==0)
+					 		{{$Results->Ques->falseNote}}
+					 	@else
+					 		{{trans('Results.Null')}}
+					 	@endif
+					 </h5>
 					 <hr>
 				@endforeach
 			</div>
